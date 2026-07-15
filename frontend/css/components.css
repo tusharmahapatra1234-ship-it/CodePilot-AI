@@ -181,3 +181,30 @@ margin-top:20px;
 box-shadow:var(--shadow);
 
 }
+.panel-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.panel-header button{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.panel-header button:hover{
+    opacity:0.9;
+}
+
+.editor-footer{
+    display:flex;
+    justify-content:space-between;
+    margin-top:10px;
+    color:#666;
+    font-size:14px;
+}
