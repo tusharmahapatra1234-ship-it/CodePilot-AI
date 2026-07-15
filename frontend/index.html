@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CodePilot AI</title>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+   <header class="header">
+    <div class="logo-section">
+        <h1>🧠 CodePilot AI</h1>
+        <p>AI Powered Code Review Platform</p>
+    </div>
+
+    <div class="status-section">
+        <span class="status-dot"></span>
+        <span class="status-text">Online</span>
+
+        <span class="version">v1.0.0</span>
+    </div>
+</header>
+
+    <!-- Main -->
+   <main class="main-container">
+
+    <section class="editor-panel">
+
+        <h2>Code Editor</h2>
+
+        <textarea
+            id="codeInput"
+            placeholder="Paste your source code here..."
+        ></textarea>
+
+    </section>
+
+    <section class="response-panel">
+
+        <h2>AI Response</h2>
+
+        <div id="responseBox">
+
+            AI response will appear here...
+
+        </div>
+
+    </section>
+<section class="toolbar">
+
+    <select>
+
+        <option>Select Language</option>
+
+        <option>Python</option>
+
+        <option>Java</option>
+
+        <option>JavaScript</option>
+
+        <option>C</option>
+
+        <option>C++</option>
+
+        <option>HTML</option>
+
+        <option>CSS</option>
+
+    </select>
+
+    <button>Explain</button>
+
+    <button>Bugs</button>
+
+    <button>Improve</button>
+
+    <button>Optimize</button>
+
+    <button>Docs</button>
+
+    <button>Tests</button>
+
+</section>
+
+</main>
+
+    <!-- Footer -->
+    <footer>
+
+    Status : Ready
+
+    <span>
+
+        © CodePilot AI
+
+    </span>
+
+</footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
