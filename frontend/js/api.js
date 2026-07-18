@@ -1,23 +1,6 @@
-async function checkBackendHealth() {
+async function sendReviewRequest(endpoint, code, language) {
 
-    try {
-
-        const response = await fetch(`${API_BASE_URL}/health`);
-
-        return response.ok;
-
-    } catch {
-
-        return false;
-
-    }
-
-}
-
-
-async function reviewCode(code, language, action) {
-
-    const response = await fetch(`${API_BASE_URL}/review`, {
+    const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
 
         method: "POST",
 
@@ -26,15 +9,15 @@ async function reviewCode(code, language, action) {
         },
 
         body: JSON.stringify({
-
             code,
-            language,
-            action
-
+            language
         })
 
     });
 
-    return await response.json();
+    if (!response.ok) {
+        throw new Error("Server Error");
+    }
 
+    return await response.json();
 }

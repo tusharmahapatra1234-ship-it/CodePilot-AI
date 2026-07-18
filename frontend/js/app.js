@@ -1,95 +1,183 @@
-// ===============================
-// DOM Elements
-// ===============================
-
 const codeInput = document.getElementById("codeInput");
+const responseBox = document.getElementById("responseBox");
+
 const lineCount = document.getElementById("lineCount");
 const charCount = document.getElementById("charCount");
+
 const clearBtn = document.getElementById("clearBtn");
 
-const statusText = document.getElementById("serverStatus");
-const statusDot = document.getElementById("statusDot");
+const languageSelect = document.getElementById("languageSelect");
+
+const explainBtn = document.getElementById("explainBtn");
+const bugsBtn = document.getElementById("bugsBtn");
+const improveBtn = document.getElementById("improveBtn");
+const optimizeBtn = document.getElementById("optimizeBtn");
+const docsBtn = document.getElementById("docsBtn");
+const testsBtn = document.getElementById("testsBtn");
 
 
-// ===============================
-// Editor Statistics
-// ===============================
+// ==========================
+// Update Line & Character Count
+// ==========================
 
 function updateEditorStats() {
 
     const text = codeInput.value;
 
-    const lines = text === "" ? 0 : text.split("\n").length;
+    lineCount.textContent =
+        `Lines: ${text === "" ? 0 : text.split("\n").length}`;
 
-    lineCount.textContent = `Lines: ${lines}`;
-    charCount.textContent = `Characters: ${text.length}`;
+    charCount.textContent =
+        `Characters: ${text.length}`;
 }
 
+codeInput.addEventListener("input", updateEditorStats);
 
-// ===============================
+
+// ==========================
 // Clear Button
-// ===============================
+// ==========================
 
 clearBtn.addEventListener("click", () => {
 
     codeInput.value = "";
+
+    responseBox.innerHTML = "";
 
     updateEditorStats();
 
 });
 
 
-// ===============================
-// Update Editor Stats While Typing
-// ===============================
+// ==========================
+// Common Review Function
+// ==========================
 
-codeInput.addEventListener("input", updateEditorStats);
+async function runFeature(endpoint, loadingText) {
 
+    const code = codeInput.value.trim();
 
-// ===============================
-// Backend Status
-// ===============================
+    if (code === "") {
+        alert("Please paste some code.");
+        return;
+    }
 
-async function updateServerStatus() {
+    if (languageSelect.value === "") {
+        alert("Please select a language.");
+        return;
+    }
 
-    if (!statusText || !statusDot) return;
+    responseBox.innerHTML = loadingText;
 
     try {
 
-        const online = await checkBackendHealth();
+        const result = await sendReviewRequest(
+            endpoint,
+            code,
+            languageSelect.value
+        );
 
-        if (online) {
+        responseBox.innerText = result.response;
 
-            statusText.textContent = "Online";
-            statusDot.style.background = "#22C55E";
+    }
 
-        } else {
+    catch (error) {
 
-            statusText.textContent = "Offline";
-            statusDot.style.background = "#EF4444";
+        console.error(error);
 
-        }
-
-    } catch (error) {
-
-        statusText.textContent = "Offline";
-        statusDot.style.background = "#EF4444";
-
-        console.error("Backend Error:", error);
+        responseBox.innerHTML = error.message;
 
     }
 
 }
 
 
-// ===============================
-// App Initialization
-// ===============================
+// ==========================
+// Explain
+// ==========================
 
-document.addEventListener("DOMContentLoaded", () => {
+explainBtn.addEventListener("click", () => {
 
-    updateEditorStats();
-
-    updateServerStatus();
+    runFeature(
+        "explain",
+        "⏳ Explaining Code..."
+    );
 
 });
+
+
+// ==========================
+// Bugs
+// ==========================
+
+bugsBtn.addEventListener("click", () => {
+
+    runFeature(
+        "bugs",
+        "🐞 Finding Bugs..."
+    );
+
+});
+
+
+// ==========================
+// Improve
+// ==========================
+
+improveBtn.addEventListener("click", () => {
+
+    runFeature(
+        "improve",
+        "✨ Improving Code..."
+    );
+
+});
+
+
+// ==========================
+// Optimize
+// ==========================
+
+optimizeBtn.addEventListener("click", () => {
+
+    runFeature(
+        "optimize",
+        "⚡ Optimizing Code..."
+    );
+
+});
+
+
+// ==========================
+// Documentation
+// ==========================
+
+docsBtn.addEventListener("click", () => {
+
+    runFeature(
+        "generate-docs",
+        "📄 Generating Documentation..."
+    );
+
+});
+
+
+// ==========================
+// Unit Tests
+// ==========================
+
+testsBtn.addEventListener("click", () => {
+
+    runFeature(
+        "generate-tests",
+        "🧪 Generating Unit Tests..."
+    );
+
+});
+
+
+// ==========================
+// Initial Stats
+// ==========================
+
+updateEditorStats();
