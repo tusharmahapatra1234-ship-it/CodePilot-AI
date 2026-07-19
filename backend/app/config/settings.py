@@ -4,9 +4,11 @@ import os
 
 # Project root (CodePilot-AI)
 BASE_DIR = Path(__file__).resolve().parents[3]
+ENV_PATH = BASE_DIR / ".env"
 
 # Load .env from project root
-load_dotenv(BASE_DIR / ".env")
+if ENV_PATH.exists():
+    load_dotenv(ENV_PATH, override=True)
 
 
 class Settings:
