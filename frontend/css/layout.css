@@ -1,6 +1,13 @@
 body{
-
+    margin:0;
+    font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    color:var(--text);
     background:var(--background);
-
+    min-height:100vh;
 }
+
+*{box-sizing:border-box;}
+
+main, header, footer, section{display:block;}
+
 layout.css
