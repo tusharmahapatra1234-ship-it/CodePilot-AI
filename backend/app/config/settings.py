@@ -19,7 +19,7 @@ class Settings:
 
     API_PORT = int(os.getenv("API_PORT", 8000))
 
-    GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
+    GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.1-flash-lite")
 
 
 settings = Settings()
