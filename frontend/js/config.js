@@ -1,1 +1,1 @@
-const API_BASE_URL = window.__CODEPILOT_API_URL__ || "https://codepilot-ai-76s8.onrender.com";
+const API_BASE_URL = (window.__CODEPILOT_API_URL__ || "https://codepilot-ai-76s8.onrender.com").replace(/\/$/, "");
