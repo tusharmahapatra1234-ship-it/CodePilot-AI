@@ -15,6 +15,8 @@ const improveBtn = document.getElementById("improveBtn");
 const optimizeBtn = document.getElementById("optimizeBtn");
 const docsBtn = document.getElementById("docsBtn");
 const testsBtn = document.getElementById("testsBtn");
+const heroExplainBtn = document.getElementById("heroExplainBtn");
+const heroClearBtn = document.getElementById("heroClearBtn");
 
 const serverStatus = document.getElementById("serverStatus");
 const statusDot = document.getElementById("statusDot");
@@ -81,6 +83,17 @@ copyBtn.addEventListener("click", async () => {
 
 });
 
+
+heroExplainBtn?.addEventListener("click", () => {
+    codeInput.focus();
+    runFeature("explain", "⏳ Explaining Code...");
+});
+
+heroClearBtn?.addEventListener("click", () => {
+    codeInput.value = "";
+    responseBox.innerHTML = "";
+    updateEditorStats();
+});
 
 // ==========================
 // Backend status
