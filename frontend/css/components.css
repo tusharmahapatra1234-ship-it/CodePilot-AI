@@ -231,13 +231,18 @@
     color:var(--secondary);
 }
 
-.toolbar button{
+.toolbar button,
+.theme-btn{
     background:linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
     color:white;
     border:none;
     cursor:pointer;
     font-weight:600;
     transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.theme-btn{
+    min-width:140px;
 }
 
 .toolbar button:hover{
@@ -253,11 +258,67 @@ footer{
     font-size:14px;
 }
 
+.chat-panel{
+    margin:0 36px 24px;
+    border:1px solid var(--border);
+    border-radius:24px;
+    background:var(--surface);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.chat-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 18px;
+    background:linear-gradient(135deg, rgba(79,70,229,0.12) 0%, rgba(255,255,255,0.95) 100%);
+}
+
+.chat-header h3{margin:0; color:var(--secondary);}
+
+.chat-header button{border:none; background:transparent; font-size:22px; cursor:pointer; color:var(--secondary);}
+
+.chat-messages{max-height:220px; overflow:auto; padding:16px; display:grid; gap:10px; background:var(--surface-muted);}
+
+.chat-bubble{padding:10px 12px; border-radius:12px; max-width:85%; line-height:1.5;}
+.chat-bubble.ai{background:white; color:var(--secondary);} 
+.chat-bubble.user{background:linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%); color:white; margin-left:auto;}
+
+.chat-input-row{display:flex; gap:10px; padding:14px;}
+.chat-input-row input{flex:1; padding:10px 12px; border-radius:999px; border:1px solid var(--border);}
+.chat-input-row button{border:none; border-radius:999px; padding:10px 14px; background:linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%); color:white; cursor:pointer;}
+
+body.dark{
+    --background:linear-gradient(135deg, #020617 0%, #111827 100%);
+    --surface:#111827;
+    --surface-muted:#1f2937;
+    --text:#f8fafc;
+    --muted:#cbd5e1;
+    --secondary:#f8fafc;
+    --border:#334155;
+}
+
+body.dark .hero-copy,
+body.dark .hero-card,
+body.dark .editor-panel,
+body.dark .response-panel,
+body.dark .toolbar,
+body.dark .chat-panel,
+body.dark .header,
+body.dark footer{
+    background:rgba(17,24,39,0.95);
+    color:#f8fafc;
+}
+
+body.dark .chat-bubble.ai{background:#1f2937; color:#f8fafc;}
+
 @media (max-width: 900px){
     .hero{grid-template-columns:1fr;}
     .main-container{grid-template-columns:1fr;}
     .header{flex-direction:column; align-items:flex-start; gap:14px;}
     .status-section{align-self:flex-start;}
+    .chat-panel{margin:0 18px 24px;}
 }
 
 @media (max-width: 640px){

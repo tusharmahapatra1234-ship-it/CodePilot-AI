@@ -17,6 +17,16 @@ const docsBtn = document.getElementById("docsBtn");
 const testsBtn = document.getElementById("testsBtn");
 const heroExplainBtn = document.getElementById("heroExplainBtn");
 const heroClearBtn = document.getElementById("heroClearBtn");
+const themeToggle = document.getElementById("themeToggle");
+const downloadBtn = document.getElementById("downloadBtn");
+const chatToggleBtn = document.getElementById("chatToggleBtn");
+const closeChatBtn = document.getElementById("closeChatBtn");
+const chatPanel = document.getElementById("chatPanel");
+const chatMessages = document.getElementById("chatMessages");
+const chatInput = document.getElementById("chatInput");
+const sendChatBtn = document.getElementById("sendChatBtn");
+const uploadBtn = document.getElementById("uploadBtn");
+const fileInput = document.getElementById("fileInput");
 
 const serverStatus = document.getElementById("serverStatus");
 const statusDot = document.getElementById("statusDot");
@@ -93,6 +103,69 @@ heroClearBtn?.addEventListener("click", () => {
     codeInput.value = "";
     responseBox.innerHTML = "";
     updateEditorStats();
+});
+
+function toggleTheme() {
+    document.body.classList.toggle("dark");
+    const dark = document.body.classList.contains("dark");
+    themeToggle.textContent = dark ? "☀️ Light Mode" : "🌙 Dark Mode";
+}
+
+themeToggle?.addEventListener("click", toggleTheme);
+
+downloadBtn?.addEventListener("click", () => {
+    const text = responseBox.innerText.trim();
+    if (!text) {
+        alert("No response to download.");
+        return;
+    }
+
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "codepilot-response.txt";
+    link.click();
+    URL.revokeObjectURL(url);
+});
+
+function addChatMessage(text, sender = "ai") {
+    const div = document.createElement("div");
+    div.className = `chat-bubble ${sender}`;
+    div.textContent = text;
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+chatToggleBtn?.addEventListener("click", () => {
+    chatPanel.hidden = !chatPanel.hidden;
+});
+
+closeChatBtn?.addEventListener("click", () => {
+    chatPanel.hidden = true;
+});
+
+sendChatBtn?.addEventListener("click", () => {
+    const message = chatInput.value.trim();
+    if (!message) return;
+    addChatMessage(message, "user");
+    chatInput.value = "";
+    addChatMessage(`I can help with: "${message}". Paste code and select a feature to get a deeper review.`, "ai");
+});
+
+uploadBtn?.addEventListener("click", () => fileInput.click());
+
+fileInput?.addEventListener("change", (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+        codeInput.value = reader.result;
+        updateEditorStats();
+        responseBox.innerText = `Uploaded ${file.name}. Choose a review action to analyze it.`;
+    };
+    reader.readAsText(file);
 });
 
 // ==========================

@@ -131,6 +131,8 @@
 
     <section class="toolbar">
 
+        <button id="themeToggle" class="theme-btn">🌙 Dark Mode</button>
+
         <select id="languageSelect">
 
             <option value="">Select Language</option>
@@ -181,6 +183,22 @@
     <!-- =========================
             FOOTER
     ========================== -->
+
+    <section class="chat-panel" id="chatPanel" hidden>
+        <div class="chat-header">
+            <h3>💬 AI Chat Assistant</h3>
+            <button id="closeChatBtn">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-bubble ai">Hi! Ask me anything about your code, like: explain this function, find bugs, or improve performance.</div>
+        </div>
+        <div class="chat-input-row">
+            <input id="chatInput" placeholder="Ask about your code..." />
+            <button id="sendChatBtn">Send</button>
+        </div>
+    </section>
+
+    <input id="fileInput" type="file" hidden />
 
     <footer>
 
